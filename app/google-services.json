@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "384286159320",
-    "firebase_url": "https://junmemo-a38a8.firebaseio.com",
-    "project_id": "junmemo-a38a8",
-    "storage_bucket": "junmemo-a38a8.appspot.com"
+    "project_number": "863140646112",
+    "firebase_url": "https://junmemo-81a38.firebaseio.com",
+    "project_id": "junmemo-81a38",
+    "storage_bucket": "junmemo-81a38.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:384286159320:android:22f31b19d696ff540242ad",
+        "mobilesdk_app_id": "1:863140646112:android:a279a78fb355ed58b5d485",
         "android_client_info": {
           "package_name": "com.junhyuk.junmemo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "384286159320-e372urg2s447d4c4oka3qd11mla9pqo1.apps.googleusercontent.com",
+          "client_id": "863140646112-n8fj80qfqadi001oit0ita375b0sb4ar.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.junhyuk.junmemo",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "384286159320-t271vkg4mt4aimtgggo03646356gr0rk.apps.googleusercontent.com",
+          "client_id": "863140646112-sqat3183erof6q3m8gc1rqkpjt9vlt0f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDb2V-tthXcWZyHa_7RZaF76Ws16odlVpY"
+          "current_key": "AIzaSyDjdu86IasICzk8LWd012spCmxqSD9-QCM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "384286159320-t271vkg4mt4aimtgggo03646356gr0rk.apps.googleusercontent.com",
+              "client_id": "863140646112-sqat3183erof6q3m8gc1rqkpjt9vlt0f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

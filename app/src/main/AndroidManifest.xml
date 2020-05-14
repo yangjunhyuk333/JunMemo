@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.junhyuk.junmemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_new"
@@ -9,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".IntroActivity">
+        <activity android:name=".memo.MemoPrint"></activity>
+        <activity android:name=".memo.Main2Activity" />
+        <activity android:name=".memo.MainActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/edit_email"
+        android:id="@+id/edit_em"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/edit_password"
+        android:id="@+id/edit_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -74,15 +74,16 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3"
         android:background="@android:color/transparent"/>
 
-    <ImageView
-        android:id="@+id/login_button"
+    <ImageButton
+        android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:src="@drawable/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        android:background="@android:color/transparent"/>
 
     <TextView
         android:id="@+id/text"
@@ -91,11 +92,12 @@
         android:text="왜 로그인을 해야 되나요?"
         android:textSize="15dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn"
         app:layout_constraintVertical_bias="0.042" />
 
 
