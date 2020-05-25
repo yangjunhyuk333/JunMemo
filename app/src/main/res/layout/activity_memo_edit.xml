@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".memo.Main2Activity"
+    tools:context=".memo.MemoEditActivity"
     android:background="@color/gray">
 
     <LinearLayout
-        android:id="@+id/container_title"
+        android:id="@+id/edit_title"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:orientation="vertical"
@@ -23,7 +23,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/container_content"
+        android:id="@+id/edit_content"
         android:layout_width="match_parent"
         android:layout_height="620dp"
         android:orientation="vertical"
@@ -31,11 +31,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_title"
+        app:layout_constraintTop_toBottomOf="@+id/edit_title"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/save_button"
+        android:id="@+id/edit_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
@@ -45,10 +45,10 @@
         android:scaleType="fitCenter"
         android:src="@drawable/save_button"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/container_title"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/container_title"
+        app:layout_constraintStart_toEndOf="@+id/edit_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7" />
 

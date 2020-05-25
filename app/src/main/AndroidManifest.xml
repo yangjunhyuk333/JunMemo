@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".memo.MemoPrint"></activity>
+        <activity android:name=".memo.MemoEditActivity"></activity>
+        <activity android:name=".memo.MemoPrint"
+            android:noHistory="true"/>
         <activity android:name=".memo.Main2Activity" />
-        <activity android:name=".memo.MainActivity" />
+        <activity android:name=".memo.MainActivity"
+            android:noHistory="true"
+            />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".intro.IntroActivity">
             <intent-filter>

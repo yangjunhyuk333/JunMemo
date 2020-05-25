@@ -1,4 +1,4 @@
-package com.junhyuk.junmemo.memo.fragment;
+package com.junhyuk.junmemo.memo.editMemo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,22 +12,21 @@ import androidx.fragment.app.Fragment;
 
 import com.junhyuk.junmemo.R;
 import com.junhyuk.junmemo.data.Memo;
-import com.junhyuk.junmemo.memo.MainActivity;
 
-public class MemoTitle extends Fragment {
+import static com.junhyuk.junmemo.memo.MemoEditActivity.positionEdit;
+
+public class EditTitle extends Fragment {
 
     public static EditText editTitle;
-    public Memo.MemoData memo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_title, container, false);
+        View view = inflater.inflate(R.layout.edit_title, container, false);
 
-        memo = new Memo.MemoData();
+        editTitle = (EditText) view.findViewById(R.id.title_edit);
 
-        editTitle = (EditText) view.findViewById(R.id.title_input);
-
+        editTitle.setText(Memo.MemoData.memoTitleData.get(positionEdit));
 
         return view;
     }

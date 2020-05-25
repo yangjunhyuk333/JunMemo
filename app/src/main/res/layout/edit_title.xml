@@ -16,7 +16,7 @@
         app:layout_constraintVertical_bias="0.057" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frameLayout_title"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@id/imageView7"
@@ -27,7 +27,7 @@
         app:layout_constraintVertical_bias="0.45">
 
         <EditText
-            android:id="@+id/title_input"
+            android:id="@+id/title_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

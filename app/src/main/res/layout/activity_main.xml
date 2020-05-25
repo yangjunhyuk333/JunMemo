@@ -23,6 +23,7 @@
         android:src="@drawable/plus_button"
         app:pressedTranslationZ="12dp"
         android:backgroundTint="@color/white"
-        app:backgroundTint="@color/white"/>
+        app:backgroundTint="@color/white"
+        />
 
 </FrameLayout>
