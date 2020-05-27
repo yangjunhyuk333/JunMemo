@@ -17,6 +17,7 @@ import com.junhyuk.junmemo.memo.print.PrintMemoContent;
 import com.junhyuk.junmemo.memo.print.PrintMemoTitle;
 
 public class MemoPrint extends AppCompatActivity {
+    //데이터 출력 엑티비티
 
     FragmentManager fragmentManager;
 

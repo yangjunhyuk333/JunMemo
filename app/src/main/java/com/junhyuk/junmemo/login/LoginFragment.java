@@ -65,6 +65,7 @@ public class LoginFragment extends Fragment {
                 String getUserEmail = editEmail.getText().toString().trim();
                 String getUserPassword = editPassword.getText().toString().trim();
 
+
                 if(TextUtils.isEmpty(getUserEmail)){
                     Toast.makeText(context, "Email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
                     return;

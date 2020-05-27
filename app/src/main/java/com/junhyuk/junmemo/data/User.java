@@ -6,9 +6,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class User {
+    //파이어베이스 데이터베이스 회원 정보
+    //현재 사용하고 있지는 않는 클래스
     public String userName;
     public String email;
     public String password;
+
+    public String userMemoTitle;
+    public String userMemoContent;
+    public String userMemoId;
 
     public User(){
 
@@ -47,10 +53,10 @@ public class User {
     @NonNull
     @Override
     public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ",email='" + email + '\'' +
-                ",password='" + password + '\'' +
+        return "Memo{" +
+                "memoId='" + userMemoId + '\'' +
+                ",memoTitle='" + userMemoTitle + '\'' +
+                ",memoContent='" + userMemoContent + '\'' +
                 '}';
     }
 

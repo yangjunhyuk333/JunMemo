@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.room.Room;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.junhyuk.junmemo.memo.fragment.MemoTitle;
 import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
+    //데이터 입력 엑티비티
 
     FragmentManager fragmentManager;
 
@@ -72,6 +74,11 @@ public class Main2Activity extends AppCompatActivity {
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
+
+                final ProgressDialog progressDialog = new ProgressDialog(Main2Activity.this);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("잠시만 기다려 주세요");
+                progressDialog.show();
 
                 db.memoDao().getTitle().observe(this, strings -> {
                     Log.d("DataBase", "data: " + strings.toString());

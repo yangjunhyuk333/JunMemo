@@ -19,6 +19,7 @@ import com.junhyuk.junmemo.memo.editMemo.EditTitle;
 import android.os.Handler;
 
 public class MemoEditActivity extends AppCompatActivity {
+    //데이터 수정 엑티비티
 
     FragmentManager fragmentManager;
 

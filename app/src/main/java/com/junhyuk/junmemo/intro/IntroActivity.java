@@ -21,8 +21,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
+    //인트로 엑티비티 데이터베이스에 데이터들을 받아오는 역할도 함
 
     FirebaseAuth firebaseAuth;
+
 
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
@@ -36,6 +38,7 @@ public class IntroActivity extends AppCompatActivity {
 
     AppDatabase db;
 
+    //데이터베이스 값을 arraylist로 전달하기 위한 리스트
     List<String> memoTitle = Arrays.asList();
     List<String> memoContent = Arrays.asList();
     List<Integer> memoId = Arrays.asList();
@@ -46,6 +49,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itro);
 
+        //로그인을 했으면 바로 메인 엑티비티로
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
@@ -81,8 +85,10 @@ public class IntroActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
+        //인트로 엑티비티는 한번 호출되고 다시 호출될일이 없어서 onRestart 메소드를 통해서 바로 종료
         super.onRestart();
         finish();
+
     }
 
     @Override

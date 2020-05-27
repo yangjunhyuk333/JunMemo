@@ -1,17 +1,14 @@
 package com.junhyuk.junmemo.memo;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.junhyuk.junmemo.SwipeControllerActions;
 
 import static androidx.recyclerview.widget.ItemTouchHelper.*;
 
@@ -160,12 +157,12 @@ class SwipeController extends Callback {
         RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom());
         p.setColor(Color.BLUE);
         c.drawRoundRect(leftButton, corners, corners, p);
-        drawText("EDIT", c, leftButton, p);
+        drawText("수정", c, leftButton, p);
 
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
         p.setColor(Color.RED);
         c.drawRoundRect(rightButton, corners, corners, p);
-        drawText("DELETE", c, rightButton, p);
+        drawText("삭제", c, rightButton, p);
 
         buttonInstance = null;
         if (buttonShowedState == ButtonsState.LEFT_VISIBLE) {
@@ -181,6 +178,7 @@ class SwipeController extends Callback {
         p.setColor(Color.WHITE);
         p.setAntiAlias(true);
         p.setTextSize(textSize);
+        p.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         float textWidth = p.measureText(text);
         c.drawText(text, button.centerX()-(textWidth/2), button.centerY()+(textSize/2), p);
