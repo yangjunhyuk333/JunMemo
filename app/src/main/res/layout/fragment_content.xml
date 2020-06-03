@@ -5,31 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView6"
+    <FrameLayout
         android:layout_width="380dp"
-        android:layout_height="700dp"
-        android:src="@drawable/content_box"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:layout_width="380dp"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toBottomOf="@id/imageView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.49">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/content_input"
-            android:layout_width="362dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp"
             android:background="@android:color/transparent"
             android:ems="15"
             android:hint="내용"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,14 +18,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.junhyuk.junmemo.R;
 import com.junhyuk.junmemo.data.Memo;
 import com.junhyuk.junmemo.data.database.AppDatabase;
-import com.junhyuk.junmemo.data.firebase.MemoModel;
-import com.junhyuk.junmemo.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
-        //플로팅 버튼
+        //플로팅 버튼 아이디 적용
         floatingButton = findViewById(R.id.floating_button);
 
-        //리사이클러 뷰
+        //리사이클러 뷰 아이디 적용
         recyclerView = findViewById(R.id.recycler_view);
 
         //데이터베이스 인스턴스 얻기
@@ -75,12 +71,14 @@ public class MainActivity extends AppCompatActivity {
 //        firebaseAuth.getInstance();
 //        firebaseUser = firebaseAuth.getCurrentUser();
 
+//        Log.d("FireBaseUser", "UserData: " + firebaseUser);
+
         //데이터 베이스 정보 로그 출력
         db.memoDao().getAll().observe(this, memoData -> {
             Log.d("DataBase", "AllData: " + memoData.toString());
         });
 
-        //리사이클러 뷰
+        //리사이클러 뷰 출력
         if(Memo.MemoData.memoContentData != null && Memo.MemoData.memoTitleData != null){
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
@@ -88,16 +86,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //플로팅 버튼 작업 처리
+        //메모 추가 엑티비티로 이동
         floatingButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
             startActivity(intent);
         });
 
-//        memoSaveRealTimeDataBase();
+        //memo 정보를 realDataBase 에 저장
+        //memoSaveRealTimeDataBase();
 
         //데이터베이스 정보 받아서 arraylist로 처리
 
-        //제목
+        //제목 DB 저장
         db.memoDao().getTitle().observe(this, strings -> {
             Log.d("DataBase", "data1: " + strings.toString());
             memoTitle.clear();
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("DataBase", "data3: " + Memo.MemoData.memoTitleData);
         });
 
-        //내용
+        //내용 DB 저장
         db.memoDao().getContent().observe(this, strings -> {
             Log.d("DataBase", "content_data1: " + strings.toString());
             memoContent.clear();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("DataBase", "content_data3: " + Memo.MemoData.memoContentData);
         });
 
-        //아이디
+        //아이디 DB 저장
         db.memoDao().getID().observe(this, integers -> {
             Log.d("DataBase", "Id1: " + integers);
             memoId.clear();
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //스와이프 처리 코드
+        //리사이클러 뷰 아이템 스와이프 기능 처리 코드
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
@@ -158,9 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 swipeController.onDraw(c);
             }
         });
-
-
-
     }
 
 
@@ -192,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             viewHolder.content.setText(memoContentData.get(position));
 
             viewHolder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(getApplicationContext(), MemoPrint.class);
+                Intent intent = new Intent(getApplicationContext(), MemoEditActivity.class);
                 intent.putExtra("Position", viewHolder.getAdapterPosition());
                 startActivity(intent);
             });

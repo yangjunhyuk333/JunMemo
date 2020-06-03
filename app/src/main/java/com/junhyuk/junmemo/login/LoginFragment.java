@@ -59,34 +59,28 @@ public class LoginFragment extends Fragment {
         editEmail = (EditText) view.findViewById(R.id.edit_em);
         editPassword = (EditText) view.findViewById(R.id.edit_pass);
 
-        loginbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getUserEmail = editEmail.getText().toString().trim();
-                String getUserPassword = editPassword.getText().toString().trim();
+        loginbutton.setOnClickListener(v -> {
+            String getUserEmail = editEmail.getText().toString().trim();
+            String getUserPassword = editPassword.getText().toString().trim();
 
 
-                if(TextUtils.isEmpty(getUserEmail)){
-                    Toast.makeText(context, "Email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(TextUtils.isEmpty(getUserPassword)){
-                    Toast.makeText(context, "비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                }
-
-                firebaseAuth.signInWithEmailAndPassword(getUserEmail, getUserPassword).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            getActivity().finish();
-                            startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
-                        }else{
-                            Toast.makeText(context, "로그인 실패!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            if(TextUtils.isEmpty(getUserEmail)){
+                Toast.makeText(context, "Email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if(TextUtils.isEmpty(getUserPassword)){
+                Toast.makeText(context, "비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            }
+
+            firebaseAuth.signInWithEmailAndPassword(getUserEmail, getUserPassword).addOnCompleteListener(getActivity(), task -> {
+                if(task.isSuccessful()){
+                    getActivity().finish();
+                    startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                }else{
+                    Toast.makeText(context, "로그인 실패!", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         return view;

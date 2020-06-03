@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static androidx.recyclerview.widget.ItemTouchHelper.*;
 
+// 설정 값 선언
 enum ButtonsState {
     GONE,
     LEFT_VISIBLE,
     RIGHT_VISIBLE
 }
 
+//swipeController 클래스 선언부
 class SwipeController extends Callback {
 
     private boolean swipeBack = false;
@@ -155,12 +157,12 @@ class SwipeController extends Callback {
         Paint p = new Paint();
 
         RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom());
-        p.setColor(Color.BLUE);
+        p.setColor(0xff07038c);
         c.drawRoundRect(leftButton, corners, corners, p);
         drawText("수정", c, leftButton, p);
 
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-        p.setColor(Color.RED);
+        p.setColor(0xfff20732);
         c.drawRoundRect(rightButton, corners, corners, p);
         drawText("삭제", c, rightButton, p);
 

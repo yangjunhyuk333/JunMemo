@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import com.junhyuk.junmemo.memo.editMemo.EditTitle;
 import android.os.Handler;
 
 public class MemoEditActivity extends AppCompatActivity {
+
     //데이터 수정 엑티비티
 
     FragmentManager fragmentManager;
@@ -31,8 +33,11 @@ public class MemoEditActivity extends AppCompatActivity {
 
     Intent intent;
 
+    //핸들러 생성
+
     Handler handler = new Handler();
 
+    //runnable 객체 생성
     Runnable runnable = () -> {
         Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent1);
@@ -44,9 +49,11 @@ public class MemoEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo_edit);
 
+        // 엑션바 디자인
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
+        //프래그먼트
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.edit_title, new EditTitle());
@@ -56,7 +63,7 @@ public class MemoEditActivity extends AppCompatActivity {
         db = AppDatabase.getAppDatabase(this);
 
         intent = getIntent();
-        positionEdit = intent.getExtras().getInt("PositionIndex");
+        positionEdit = intent.getExtras().getInt("Position");
 
         editButton = findViewById(R.id.edit_button);
 
@@ -90,6 +97,7 @@ public class MemoEditActivity extends AppCompatActivity {
     private class EditThread extends Thread{
 
         public EditThread() {
+
         }
 
         public void run(){
