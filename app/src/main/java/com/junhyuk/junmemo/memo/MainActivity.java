@@ -3,15 +3,15 @@ package com.junhyuk.junmemo.memo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +19,8 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.junhyuk.junmemo.R;
+import com.junhyuk.junmemo.ViewModel.MainViewModel;
 import com.junhyuk.junmemo.data.Memo;
-import com.junhyuk.junmemo.data.database.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,20 +32,13 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton floatingButton;
     RecyclerView recyclerView;
 
-    AppDatabase db;
-
-    //데이터베이스의 값을 받아와서 array리스트로 전달 해주기 위한 변수들
-    private List<String> memoTitle = Arrays.asList();
-    private List<String> memoContent = Arrays.asList();
-    private List<Integer> memoId = Arrays.asList();
-
     //리사이클러 뷰 스와이프 작업을 위한 객체
     SwipeController swipeController = null;
 
-    //파이어베이스 데이터베이스
-//    private FirebaseDatabase firebaseDatabase;
-//    private FirebaseUser firebaseUser;
-//    private FirebaseAuth firebaseAuth;
+    //arraylist로 변경 시킬때 중간 저장 리스트
+    private List<String> memoTitle = Arrays.asList();
+    private List<String> memoContent = Arrays.asList();
+    private List<Integer> memoId = Arrays.asList();
 
     //onCreate
     @Override
@@ -63,19 +56,35 @@ public class MainActivity extends AppCompatActivity {
         //리사이클러 뷰 아이디 적용
         recyclerView = findViewById(R.id.recycler_view);
 
-        //데이터베이스 인스턴스 얻기
-        db = AppDatabase.getAppDatabase(this);
+        //ViewModel
+        MainViewModel mainViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication()))
+                .get(MainViewModel.class);
 
-        //파이어베이스 인스턴스 얻어오기
-//        firebaseDatabase = FirebaseDatabase.getInstance();
-//        firebaseAuth.getInstance();
-//        firebaseUser = firebaseAuth.getCurrentUser();
+        //DB 정보 받아오기
+        //title
+        mainViewModel.getMemoTitle().observe(this, strings -> {
+            memoTitle.clear();
+            memoTitle = strings;
+            Memo.MemoData.memoTitleData.clear();
+            Memo.MemoData.memoTitleData.addAll(memoTitle);
+        });
 
-//        Log.d("FireBaseUser", "UserData: " + firebaseUser);
+        //DB 정보 받아오기
+        //content
+        mainViewModel.getMemoContent().observe(this, strings -> {
+            memoContent.clear();
+            memoContent = strings;
+            Memo.MemoData.memoContentData.clear();
+            Memo.MemoData.memoContentData.addAll(memoContent);
+        });
 
-        //데이터 베이스 정보 로그 출력
-        db.memoDao().getAll().observe(this, memoData -> {
-            Log.d("DataBase", "AllData: " + memoData.toString());
+        //DB 정보 받아오기
+        //ID
+        mainViewModel.getMemoId().observe(this, integers -> {
+            memoId.clear();
+            memoId = integers;
+            Memo.MemoData.memoIdData.clear();
+            Memo.MemoData.memoIdData.addAll(memoId);
         });
 
         //리사이클러 뷰 출력
@@ -92,44 +101,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //memo 정보를 realDataBase 에 저장
-        //memoSaveRealTimeDataBase();
-
-        //데이터베이스 정보 받아서 arraylist로 처리
-
-        //제목 DB 저장
-        db.memoDao().getTitle().observe(this, strings -> {
-            Log.d("DataBase", "data1: " + strings.toString());
-            memoTitle.clear();
-            memoTitle = strings;
-            Log.d("DataBase", "data2: " + memoTitle.toString());
-            Memo.MemoData.memoTitleData.clear();
-            Memo.MemoData.memoTitleData.addAll(memoTitle);
-            Log.d("DataBase", "data3: " + Memo.MemoData.memoTitleData);
-        });
-
-        //내용 DB 저장
-        db.memoDao().getContent().observe(this, strings -> {
-            Log.d("DataBase", "content_data1: " + strings.toString());
-            memoContent.clear();
-            memoContent = strings;
-            Log.d("DataBase", "content_data2: " + memoContent.toString());
-            Memo.MemoData.memoContentData.clear();
-            Memo.MemoData.memoContentData.addAll(memoContent);
-            Log.d("DataBase", "content_data3: " + Memo.MemoData.memoContentData);
-        });
-
-        //아이디 DB 저장
-        db.memoDao().getID().observe(this, integers -> {
-            Log.d("DataBase", "Id1: " + integers);
-            memoId.clear();
-            memoId = integers;
-            Log.d("DataBase", "Id2: " + memoId.toString());
-            Memo.MemoData.memoIdData.clear();
-            Memo.MemoData.memoIdData.addAll(memoId);
-            Log.d("DataBase", "Id3: " + Memo.MemoData.memoIdData);
-        });
-
         //스와이프 작업 처리
         swipeController = new SwipeController(new SwipeControllerActions() {
             //왼쪽 스와이프 버튼 클릭시 수정
@@ -143,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
             //오른쪽 스와이프 버튼 클릭시 삭제
             @Override
             public void onRightClicked(int position) {
-                DeleteThread deleteThread = new DeleteThread(position);
-                deleteThread.start();
+                mainViewModel.ThreadCall(position);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 
-        //리사이클러 뷰 아이템 스와이프 기능 처리 코드
+        //리사이클러 뷰 아이템 스와이프
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
@@ -212,29 +185,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
-    //삭제 쓰레드
-    private class DeleteThread extends Thread{
-        private int position;
-
-        public DeleteThread(int position) {
-            this.position = position;
-        }
-
-        public void run(){
-            db.memoDao().delete(Memo.MemoData.memoIdData.get(position));
-            Log.d("DataBase",  "position: " + position);
-            Log.d("DataBase",  "position: " + Memo.MemoData.memoIdData.get(position));
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-        }
-    }
-
-//    private void memoSaveRealTimeDataBase(){
-//
-//    }
-
-
 }
